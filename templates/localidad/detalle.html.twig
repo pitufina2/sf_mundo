@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Detalle de localidades</h1>
+
+<li>{{ localidad.nombre }} - {{ localidad.area }} - {{ localidad.habitantes }} - {{ localidad.cp }}</li>
+
+<ul>
+
+    {% for localidad in localidades %}
+
+        <li>{{ localidad.nombre }} - {{ localidad.area }} - {{ localidad.habitantes }} - {{ localidad.cp }}</li>
+
+    {% endfor %}
+
+</ul>
+
+<a href="{{ path('localidad') }}">Añadir localidad</a>
+
+{{ dump(localidad)}}
+
+{% endblock %}

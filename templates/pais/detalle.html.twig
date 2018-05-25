@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Detalle de paises</h1>
+
+<li>{{ pais.nombre }} - {{ pais.continente }} </li>
+
+<ul>
+
+    {% for pais in pais.presidentes %}
+
+        <li>{{ pais.nombre }} -  {{ pais.fechanac|date("m/d/Y")}} </li>
+
+    {% endfor %}
+
+</ul>
+
+<a href="{{ path('pais_detalle') }}">Añadir pais</a>
+
+{% endblock %}

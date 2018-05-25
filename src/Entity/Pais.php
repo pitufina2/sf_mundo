@@ -26,6 +26,18 @@ class Pais
      */
     private $continente;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="provincias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $region;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Presidente", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $regiones;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +63,30 @@ class Pais
     public function setContinente(string $continente): self
     {
         $this->continente = $continente;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getRegiones(): ?Presidente
+    {
+        return $this->regiones;
+    }
+
+    public function setRegiones(Presidente $regiones): self
+    {
+        $this->regiones = $regiones;
 
         return $this;
     }

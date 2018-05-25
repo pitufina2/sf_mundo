@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Localidad
      * @ORM\Column(type="string", length=100)
      */
     private $cp;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Provincia", mappedBy="localidad")
+     */
+    private $provincia;
+
+    public function __construct()
+    {
+        $this->provincia = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -85,6 +97,37 @@ class Localidad
     public function setCp(string $cp): self
     {
         $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Provincia[]
+     */
+    public function getProvincia(): Collection
+    {
+        return $this->provincia;
+    }
+
+    public function addProvincium(Provincia $provincium): self
+    {
+        if (!$this->provincia->contains($provincium)) {
+            $this->provincia[] = $provincium;
+            $provincium->setLocalidad($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProvincium(Provincia $provincium): self
+    {
+        if ($this->provincia->contains($provincium)) {
+            $this->provincia->removeElement($provincium);
+            // set the owning side to null (unless already changed)
+            if ($provincium->getLocalidad() === $this) {
+                $provincium->setLocalidad(null);
+            }
+        }
 
         return $this;
     }

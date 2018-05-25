@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Detalle de provincias</h1>
+
+<li>{{ provincia.nombre }} </li>
+
+<ul>
+
+    {% for provincia in provincia.pais %}
+
+        <li>{{ provincia.nombre }} - {{ provincia.continente }}</li>
+
+    {% endfor %}
+
+</ul>
+
+<a href="{{ path('provincia_detalle') }}">Añadir provincia</a>
+
+{% endblock %}
