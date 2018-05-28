@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,16 +29,19 @@ class Pais
     private $continente;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="provincias")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $region;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Presidente", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Region", mappedBy="pais")
      */
     private $regiones;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Presidente", mappedBy="pais", cascade={"persist", "remove"})
+     */
+    private $presidente;
+
+    public function __construct()
+    {
+        $this->regiones = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -67,26 +72,50 @@ class Pais
         return $this;
     }
 
-    public function getRegion(): ?Region
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?Region $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getRegiones(): ?Presidente
+    /**
+     * @return Collection|Region[]
+     */
+    public function getRegiones(): Collection
     {
         return $this->regiones;
     }
 
-    public function setRegiones(Presidente $regiones): self
+    public function addRegione(Region $regione): self
     {
-        $this->regiones = $regiones;
+        if (!$this->regiones->contains($regione)) {
+            $this->regiones[] = $regione;
+            $regione->setPais($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegione(Region $regione): self
+    {
+        if ($this->regiones->contains($regione)) {
+            $this->regiones->removeElement($regione);
+            // set the owning side to null (unless already changed)
+            if ($regione->getPais() === $this) {
+                $regione->setPais(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPresidente(): ?Presidente
+    {
+        return $this->presidente;
+    }
+
+    public function setPresidente(Presidente $presidente): self
+    {
+        $this->presidente = $presidente;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $presidente->getPais()) {
+            $presidente->setPais($this);
+        }
 
         return $this;
     }

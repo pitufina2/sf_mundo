@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Provincia;
+
 use App\Entity\Localidad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

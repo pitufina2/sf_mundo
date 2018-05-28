@@ -42,46 +42,9 @@ class LocalidadController extends Controller
         
     }
 
-    /**
-     * @Route("/lista", name="localidad_lista")
-     */
-    public function listado()
-    {
+    
 
-        //$this->cargarDatos();
-        $repo = $this->getDoctrine()->getRepository (Localidad::class);
-
-        $localidades = $repo->findAll();    
-
-     
-
-        return $this->render('localidad/index.html.twig', [
-            'localidades' => $localidades,
-             
-            
-        ]);
-    }
-
-    /**
-     * @Route("/detalle/{id}", name="localidad_detalle", requirements={"id"="\d+"})
-     */
-    public function detalle($id)
-    {
-
-        //$this->cargarDatos();
-        $repo = $this->getDoctrine()->getRepository (Localidad::class);
-
-        $localidad = $repo->find($id);    
-
-     
-
-        return $this->render('localidad/detalle.html.twig', [
-            'localidad' => $localidad,
-             
-            
-        ]);
-    }
-
+    
 
 
 }

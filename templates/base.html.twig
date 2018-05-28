@@ -1,12 +1,42 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('build/appstyle.css') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+        
+        {% endblock %}
     </head>
+
     <body>
+
+      {% block header %}
+      {% include '_base/header.html.twig' %}
+
+      <header>
+
+      </header>
+      {% endblock %}
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+          {% block footer %}
+            {% include '_base/footer.html.twig' %}
+
+          {% endblock %}
+
+
+        
+    
+    {% block javascripts %}
+      <link rel="stylesheet" href="{{ asset('build/app.js') }}">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+      <link rel="stylesheet" href="{{ asset('build/midatatable.js') }}">
+    {% endblock %}
+
     </body>
-</html>

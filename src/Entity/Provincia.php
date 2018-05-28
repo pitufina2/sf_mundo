@@ -24,15 +24,15 @@ class Provincia
     private $nombre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Localidad", inversedBy="provincia")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $localidad;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Region", mappedBy="provincia")
+     * @ORM\OneToMany(targetEntity="App\Entity\Localidad", mappedBy="provincia")
      */
     private $localidades;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="provincias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $region;
 
     public function __construct()
     {
@@ -56,27 +56,15 @@ class Provincia
         return $this;
     }
 
-    public function getLocalidad(): ?Localidad
-    {
-        return $this->localidad;
-    }
-
-    public function setLocalidad(?Localidad $localidad): self
-    {
-        $this->localidad = $localidad;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Region[]
+     * @return Collection|Localidad[]
      */
     public function getLocalidades(): Collection
     {
         return $this->localidades;
     }
 
-    public function addLocalidade(Region $localidade): self
+    public function addLocalidade(Localidad $localidade): self
     {
         if (!$this->localidades->contains($localidade)) {
             $this->localidades[] = $localidade;
@@ -86,7 +74,7 @@ class Provincia
         return $this;
     }
 
-    public function removeLocalidade(Region $localidade): self
+    public function removeLocalidade(Localidad $localidade): self
     {
         if ($this->localidades->contains($localidade)) {
             $this->localidades->removeElement($localidade);
@@ -95,6 +83,18 @@ class Provincia
                 $localidade->setProvincia(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }

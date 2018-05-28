@@ -29,15 +29,15 @@ class Region
     private $idioma;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Provincia", inversedBy="localidades")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $provincia;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pais", mappedBy="region")
+     * @ORM\OneToMany(targetEntity="App\Entity\Provincia", mappedBy="region")
      */
     private $provincias;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pais", inversedBy="regiones")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pais;
 
     public function __construct()
     {
@@ -73,27 +73,15 @@ class Region
         return $this;
     }
 
-    public function getProvincia(): ?Provincia
-    {
-        return $this->provincia;
-    }
-
-    public function setProvincia(?Provincia $provincia): self
-    {
-        $this->provincia = $provincia;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Pais[]
+     * @return Collection|Provincia[]
      */
     public function getProvincias(): Collection
     {
         return $this->provincias;
     }
 
-    public function addProvincia(Pais $provincia): self
+    public function addProvincia(Provincia $provincia): self
     {
         if (!$this->provincias->contains($provincia)) {
             $this->provincias[] = $provincia;
@@ -103,7 +91,7 @@ class Region
         return $this;
     }
 
-    public function removeProvincia(Pais $provincia): self
+    public function removeProvincia(Provincia $provincia): self
     {
         if ($this->provincias->contains($provincia)) {
             $this->provincias->removeElement($provincia);
@@ -112,6 +100,18 @@ class Region
                 $provincia->setRegion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPais(): ?Pais
+    {
+        return $this->pais;
+    }
+
+    public function setPais(?Pais $pais): self
+    {
+        $this->pais = $pais;
 
         return $this;
     }

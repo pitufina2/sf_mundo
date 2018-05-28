@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,19 +32,15 @@ class Localidad
     private $habitantes;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=5)
      */
     private $cp;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Provincia", mappedBy="localidad")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Provincia", inversedBy="localidades")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $provincia;
-
-    public function __construct()
-    {
-        $this->provincia = new ArrayCollection();
-    }
 
     public function getId()
     {
@@ -101,33 +95,14 @@ class Localidad
         return $this;
     }
 
-    /**
-     * @return Collection|Provincia[]
-     */
-    public function getProvincia(): Collection
+    public function getProvincia(): ?Provincia
     {
         return $this->provincia;
     }
 
-    public function addProvincium(Provincia $provincium): self
+    public function setProvincia(?Provincia $provincia): self
     {
-        if (!$this->provincia->contains($provincium)) {
-            $this->provincia[] = $provincium;
-            $provincium->setLocalidad($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProvincium(Provincia $provincium): self
-    {
-        if ($this->provincia->contains($provincium)) {
-            $this->provincia->removeElement($provincium);
-            // set the owning side to null (unless already changed)
-            if ($provincium->getLocalidad() === $this) {
-                $provincium->setLocalidad(null);
-            }
-        }
+        $this->provincia = $provincia;
 
         return $this;
     }
