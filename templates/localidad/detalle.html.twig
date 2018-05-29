@@ -2,22 +2,20 @@
 
 {% block body %}
 
-<h1>Detalle de localidades</h1>
-
-<li>{{ localidad.nombre }} - {{ localidad.area }} - {{ localidad.habitantes }} - {{ localidad.cp }}</li>
-
+<h1> Listado de Localidades </h1>
 <ul>
-
-    {% for localidad in localidades %}
-
-        <li>{{ localidad.nombre }} - {{ localidad.area }} - {{ localidad.habitantes }} - {{ localidad.cp }}</li>
-
-    {% endfor %}
-
+	<li> 	
+			{{ localidad.id }} - 
+			{{ localidad.nombre }} - 
+			{{ localidad.area }} - 
+			{{ localidad.habitantes }} - 
+			{{ localidad.cp }} -
+			{{ localidad.provincia.nombre }}
+	</li>
 </ul>
 
-<a href="{{ path('localidad') }}">Añadir localidad</a>
+<a href="{{ path('provincia_detalle',{'id': 1}) }}"> Añadir Provincia </a>
 
-{{ dump(localidad)}}
+{{ dump(localidad) }}
 
 {% endblock %}

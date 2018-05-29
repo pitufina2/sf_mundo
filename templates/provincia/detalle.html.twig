@@ -2,20 +2,24 @@
 
 {% block body %}
 
-<h1>Detalle de provincias</h1>
+<h1> Listado de provincias </h1>
 
-<li>{{ provincia.nombre }} - {{ provincia.localidades }}</li>
+	<li> 	
+		{{ provincia.nombre }}
+	</li>
 
-<ul>
 
-    {% for provincia in provincias.pais %}
+	<ul>
+		{% for localidad in provincia.localidades %}
+		<li> 
+			{{ localidad.nombre }} - {{ localidad.area }} - {{ localidad.habitantes }} - {{ localidad.cp }} 
+		</li>
 
-        <li>{{ provincia.nombre }} - {{ provincia.localidad }} - {provincia.region}}</li>
+		{% endfor %}
+	</ul>
 
-    {% endfor %}
+<a href="{{ path('provincia_detalle',{'id': 1}) }}"> Añadir Localidad </a>
 
-</ul>
-
-<a href="{{ path('provincia_detalle') }}">Añadir provincia</a>
+{{ dump(provincia) }}
 
 {% endblock %}

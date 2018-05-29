@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
 
-<h1>Listado de provincias(index provincia)</h1>
+<h1> Listado de provincias (index provincia) </h1>
 <ul>
-    {% for provincia in provincias %}
-        <li>{{ provincia.nombre }} - {{provincia.localidades}}</li>
-    {% endfor %}
+	{% for provincia in provincias %}
+	<li> 
+		{{ provincia.nombre }} - 
+		
+	</li>
+	{% endfor %}
 </ul>
-
-<a href="{{ path('provincia_nuevo') }}">Añadir provincias</a>
+<a href="{{ path('provincia_nuevo') }}"> Añadir Provincia </a>
 
 {% endblock %}
-
-

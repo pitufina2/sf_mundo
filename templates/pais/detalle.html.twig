@@ -2,20 +2,25 @@
 
 {% block body %}
 
-<h1>Detalle de países</h1>
+<h1> Listado de paises </h1>
 
-<li>{{ pais.nombre }} - {{ pais.continente }} - {{pais.regiones}} </li>
+	<li> 	
+		{{ pais.nombre }} - 
+		{{ pais.continente }}
+	</li>
 
-<ul>
 
-    {% for pais in pais.presidentes %}
+	<ul>
+		{% for region in pais.regiones %}
+		<li> 
+			{{ region.nombre }} - {{ region.idioma }} 
+		</li>
 
-        <li>{{ pais.nombre }} -  {{ pais.fechanac|date("m/d/Y")}} - {{ pais.continente }} - {{pais.regiones}}  </li>
+		{% endfor %}
+	</ul>
 
-    {% endfor %}
+<a href="{{ path('region_detalle',{'id': 1}) }}"> Añadir Presidente </a>
 
-</ul>
-
-<a href="{{ path('pais_detalle') }}">Añadir pais</a>
+{{ dump(pais) }}
 
 {% endblock %}

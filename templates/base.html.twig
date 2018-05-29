@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,7 +6,7 @@
         {% block stylesheets %}
 
         <link rel="stylesheet" href="{{ asset('build/appstyle.css') }}">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+      
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
         
@@ -34,9 +34,10 @@
         
     
     {% block javascripts %}
-      <link rel="stylesheet" href="{{ asset('build/app.js') }}">
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
-      <link rel="stylesheet" href="{{ asset('build/midatatable.js') }}">
+      <script src="{{ asset('build/app.js') }}"></script>
+      <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+   <script src="{{ asset('build/midatatable.js') }}"></script>
     {% endblock %}
 
     </body>
+</html>
