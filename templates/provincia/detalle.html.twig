@@ -4,13 +4,13 @@
 
 <h1>Detalle de provincias</h1>
 
-<li>{{ provincia.nombre }}</li>
+<li>{{ provincia.nombre }} - {{ provincia.localidades }}</li>
 
 <ul>
 
     {% for provincia in provincias.pais %}
 
-        <li>{{ provincia.nombre }} - {{ provincia.continente }}  </li>
+        <li>{{ provincia.nombre }} - {{ provincia.localidad }} - {provincia.region}}</li>
 
     {% endfor %}
 

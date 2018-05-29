@@ -2,22 +2,22 @@
 
 {% block body %}
 
-<h1>Detalle de presidentes</h1>
+	<h1>Detalle de presidentes</h1>
 
-<li>{{ presidente.nombre }} - {{ presidente.fechanac|date ('Y-m-d') }}</li>
+	<li>{{ presidente.nombre }} - {{ presidente.fechanac|date ('Y-m-d') }} -{{presidente.pais}}</li>
 
-<ul>
+	<ul>
 
-    {% for presidente in presidente.pais %}
+    	{% for presidente in presidente.pais %}
 
-        <li>{{ presidente.nombre }} - {{ presidente.contienente }}</li>
+        	<li>{{ presidente.nombre }} - {{ presidente.continente }} - {{presidente.pais}} </li>
 
-    {% endfor %}
+    	{% endfor %}
 
-</ul>
+	</ul>
 
-<a href="{{ path('presidente') }}">Añadir presidente</a>
+	<a href="{{ path('presidente') }}">Añadir presidente</a>
 
-{{ dump(presidente)}}
+	{{ dump(presidente)}}
 
 {% endblock %}

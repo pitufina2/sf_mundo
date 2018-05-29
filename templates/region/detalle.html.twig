@@ -8,9 +8,9 @@
 
 <ul>
 
-    {% for provincia in provincia.pais %}
+    {% for provincia in provincia.region %}
 
-        <li>{{ provincia.nombre }} - {{ provincia.continente }}</li>
+        <li>{{ provincia.nombre }} - {{ provincia.idioma }} - {{ provincia.localidad }} - {{provincia.provincias}}</li>
 
     {% endfor %}
 

@@ -2,15 +2,15 @@
 
 {% block body %}
 
-<h1>Detalle de paises</h1>
+<h1>Detalle de países</h1>
 
-<li>{{ pais.nombre }} - {{ pais.continente }} </li>
+<li>{{ pais.nombre }} - {{ pais.continente }} - {{pais.regiones}} </li>
 
 <ul>
 
     {% for pais in pais.presidentes %}
 
-        <li>{{ pais.nombre }} -  {{ pais.fechanac|date("m/d/Y")}} </li>
+        <li>{{ pais.nombre }} -  {{ pais.fechanac|date("m/d/Y")}} - {{ pais.continente }} - {{pais.regiones}}  </li>
 
     {% endfor %}
 
